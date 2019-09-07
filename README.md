@@ -1,5 +1,7 @@
 # HTTP::Client::DigestAuth
 
+[![Build Status](https://travis-ci.org/mamantoha/http-client-digest_auth.svg?branch=master)](https://travis-ci.org/mamantoha/http-client-digest_auth)
+
 An implementation of RFC 2617 - Digest Access Authentication. At this time
 This shard does not drop in to `HTTP::Client` and can be used for with other HTTP
 clients.
