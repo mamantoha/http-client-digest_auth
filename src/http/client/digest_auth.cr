@@ -16,7 +16,7 @@ require "digest"
 #
 # client = HTTP::Client.new(uri)
 #
-# response = client.get(uri.request_uri)
+# response = client.get(uri.full_path)
 # # response is a 401 response with a WWW-Authenticate header
 #
 # www_authenticate = response.headers["WWW-Authenticate"]
@@ -28,7 +28,7 @@ require "digest"
 # http_headers["Authorization"] = auth
 #
 # # re-issue request with Authorization
-# response = client.get(uri.request_uri, http_headers)
+# response = client.get(uri.full_path, http_headers)
 # ```
 class HTTP::Client::DigestAuth
   class Error < Exception; end
@@ -91,7 +91,7 @@ class HTTP::Client::DigestAuth
         end
 
       ha1 = hexdigest(algorithm, a1)
-      ha2 = hexdigest(algorithm, "#{method}:#{uri.request_uri}")
+      ha2 = hexdigest(algorithm, "#{method}:#{uri.full_path}")
 
       request_digest = [] of String | Nil
       request_digest.push(ha1, params["nonce"])
@@ -105,7 +105,7 @@ class HTTP::Client::DigestAuth
         "Digest username=\"#{user}\"",
         "realm=\"#{params["realm"]}\"",
         "algorithm=#{params["algorithm"]}",
-        "uri=\"#{uri.request_uri}\"",
+        "uri=\"#{uri.full_path}\"",
         "nonce=\"#{params["nonce"]}\"",
         "response=\"#{response_digest}\"",
       ]

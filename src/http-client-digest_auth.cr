@@ -1,4 +1,3 @@
-require "./http/uri"
 require "./http/client/digest_auth"
 
 class Http::Client::DigestAuth

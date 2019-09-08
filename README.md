@@ -39,7 +39,7 @@ uri.password = "passwd"
 
 client = HTTP::Client.new(uri)
 
-response = client.get(uri.request_uri)
+response = client.get(uri.full_path)
 # response is a 401 response with a WWW-Authenticate header
 
 www_authenticate = response.headers["WWW-Authenticate"]
@@ -51,7 +51,7 @@ http_headers = HTTP::Headers.new
 http_headers["Authorization"] = auth
 
 # re-issue request with Authorization
-response = client.get(uri.request_uri, http_headers)
+response = client.get(uri.full_path, http_headers)
 ```
 
 ## Contributing
