@@ -29,6 +29,8 @@ dependencies:
 ## Usage
 
 ```crystal
+require "http/client"
+require "uri"
 require "http-client-digest_auth"
 
 url = "https://httpbin.org/digest-auth/auth/admin/passwd/MD5"

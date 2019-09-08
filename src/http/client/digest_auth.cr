@@ -1,4 +1,4 @@
-require "http"
+require "http/client"
 require "uri"
 require "digest"
 

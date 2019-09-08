@@ -1,3 +1,5 @@
+require "http/client"
+require "uri"
 require "../src/http-client-digest_auth"
 
 path = "auth"     # auth or auth-int
