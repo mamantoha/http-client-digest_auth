@@ -5,8 +5,10 @@
 [![License](https://img.shields.io/github/license/mamantoha/http-client-digest_auth.svg)](https://github.com/mamantoha/http-client-digest_auth/blob/master/LICENSE)
 
 An implementation of RFC 2617 - Digest Access Authentication. At this time
-This shard does not drop in to `HTTP::Client` and can be used for with other HTTP
+this library does not drop in to `HTTP::Client` and can be used for with other HTTP
 clients.
+
+[crest](https://github.com/mamantoha/crest) uses this shard to provide _Digest Access Authentication_ support out of the box.
 
 In order to use `http-client-digest_auth` you'll need to perform some request
 wrangling on your own. See the class documentation at `HTTP::Client::DigestAuth`
