@@ -54,24 +54,22 @@ class HTTP::Client::DigestAuth
     header = ""
     params = {} of String => String
 
-    if match = www_authenticate.match(/^(\w+) (.*)/)
-      challenge = match[2]
+    if m = www_authenticate.match(/^(\w+) (.*)/)
+      challenge = m[2]
 
-      challenge.gsub(/(\w+)="(.*?)"/) do |str|
-        if match = str.match(/(\w+)="(.*?)"/)
-          params[match[1]] = match[2]
-        end
+      challenge.scan(/(\w+)="(.*?)"/) do |m|
+        params[m[1]] = m[2]
       end
 
-      if match = challenge.match(/algorithm="?(.*?)"?([, ]|$)/)
-        params["algorithm"] = match[1]
+      if m = challenge.match(/algorithm="?(.*?)"?([, ]|$)/)
+        params["algorithm"] = m[1]
       else
         params["algorithm"] = "MD5"
       end
 
-      if match = params["algorithm"].match(/(.*?)(-sess)?$/)
-        algorithm = choose_digest_algorithm(match[1])
-        sess = match[2]?
+      if m = params["algorithm"].match(/(.*?)(-sess)?$/)
+        algorithm = choose_digest_algorithm(m[1])
+        sess = m[2]?
       end
 
       algorithm = algorithm.not_nil!
@@ -160,7 +158,7 @@ class HTTP::Client::DigestAuth
     Digest::MD5.hexdigest([
       Time.now.to_unix,
       Process.pid,
-      Random::Secure.rand(4294967296),
+      Random::Secure.rand(2_i64 ** 32),
     ].join(":"))
   end
 end
