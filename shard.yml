@@ -2,12 +2,12 @@ name: http-client-digest_auth
 version: 0.2.0
 
 authors:
-  - Anton Maminov <anton.linux@gmail.com>
+  - Anton Maminov <anton.maminov@gmail.com>
 
 targets:
   http-client-digest_auth:
     main: src/http-client-digest_auth.cr
 
-crystal: 0.30.1
+crystal: 0.32.1
 
 license: MIT

@@ -156,7 +156,7 @@ class HTTP::Client::DigestAuth
   # current time, process id and a random number
   private def make_cnonce
     Digest::MD5.hexdigest([
-      Time.now.to_unix,
+      Time.utc.to_unix,
       Process.pid,
       Random::Secure.rand(2_i64 ** 32),
     ].join(":"))
