@@ -149,7 +149,11 @@ class HTTP::Client::DigestAuth
   private def hexdigest(algorithm, data)
     digest = OpenSSL::Digest.new(algorithm)
     digest << data
-    digest.hexdigest
+    {% if compare_versions(Crystal::VERSION, "0.35.0-0") >= 0 %}
+      digest.final.hexstring
+    {% else %}
+      digest.hexdigest
+    {% end %}
   end
 
   # Creates a client nonce value that is used across all requests based on the
