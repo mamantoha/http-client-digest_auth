@@ -1,5 +1,6 @@
 # HTTP::Client::DigestAuth
 
+![Crystal CI](https://github.com/mamantoha/http-client-digest_auth/workflows/Crystal%20CI/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/mamantoha/http-client-digest_auth.svg)](https://github.com/mamantoha/http-client-digest_auth/releases)
 [![License](https://img.shields.io/github/license/mamantoha/http-client-digest_auth.svg)](https://github.com/mamantoha/http-client-digest_auth/blob/master/LICENSE)
 
