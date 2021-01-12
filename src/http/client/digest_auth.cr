@@ -57,8 +57,8 @@ class HTTP::Client::DigestAuth
     if m = www_authenticate.match(/^(\w+) (.*)/)
       challenge = m[2]
 
-      challenge.scan(/(\w+)="(.*?)"/) do |m|
-        params[m[1]] = m[2]
+      challenge.scan(/(\w+)="(.*?)"/) do |_m|
+        params[_m[1]] = _m[2]
       end
 
       if m = challenge.match(/algorithm="?(.*?)"?([, ]|$)/)
