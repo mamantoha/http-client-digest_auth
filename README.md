@@ -1,6 +1,5 @@
 # HTTP::Client::DigestAuth
 
-[![Build Status](https://travis-ci.org/mamantoha/http-client-digest_auth.svg?branch=master)](https://travis-ci.org/mamantoha/http-client-digest_auth)
 [![GitHub release](https://img.shields.io/github/release/mamantoha/http-client-digest_auth.svg)](https://github.com/mamantoha/http-client-digest_auth/releases)
 [![License](https://img.shields.io/github/license/mamantoha/http-client-digest_auth.svg)](https://github.com/mamantoha/http-client-digest_auth/blob/master/LICENSE)
 
