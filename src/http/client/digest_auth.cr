@@ -57,8 +57,8 @@ class HTTP::Client::DigestAuth
     if m = www_authenticate.match(/^(\w+) (.*)/)
       challenge = m[2]
 
-      challenge.scan(/(\w+)="(.*?)"/) do |m|
-        params[m[1]] = m[2]
+      challenge.scan(/(\w+)="(.*?)"/) do |_m|
+        params[_m[1]] = _m[2]
       end
 
       if m = challenge.match(/algorithm="?(.*?)"?([, ]|$)/)
@@ -89,7 +89,12 @@ class HTTP::Client::DigestAuth
         end
 
       ha1 = hexdigest(algorithm, a1)
-      ha2 = hexdigest(algorithm, "#{method}:#{uri.full_path}")
+
+      ha2 = {% if compare_versions(Crystal::VERSION, "0.35.1") > 0 %}
+              hexdigest(algorithm, "#{method}:#{uri.request_target}")
+            {% else %}
+              hexdigest(algorithm, "#{method}:#{uri.full_path}")
+            {% end %}
 
       request_digest = [] of String | Nil
       request_digest.push(ha1, params["nonce"])
