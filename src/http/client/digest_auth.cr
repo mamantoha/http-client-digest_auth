@@ -89,12 +89,7 @@ class HTTP::Client::DigestAuth
         end
 
       ha1 = hexdigest(algorithm, a1)
-
-      ha2 = {% if compare_versions(Crystal::VERSION, "0.35.1") > 0 %}
-              hexdigest(algorithm, "#{method}:#{uri.request_target}")
-            {% else %}
-              hexdigest(algorithm, "#{method}:#{uri.full_path}")
-            {% end %}
+      ha2 = hexdigest(algorithm, "#{method}:#{uri.request_target}")
 
       request_digest = [] of String | Nil
       request_digest.push(ha1, params["nonce"])
@@ -108,7 +103,7 @@ class HTTP::Client::DigestAuth
         "Digest username=\"#{user}\"",
         "realm=\"#{params["realm"]}\"",
         "algorithm=#{params["algorithm"]}",
-        "uri=\"#{uri.full_path}\"",
+        "uri=\"#{uri.request_target}\"",
         "nonce=\"#{params["nonce"]}\"",
         "response=\"#{response_digest}\"",
       ]
@@ -154,11 +149,7 @@ class HTTP::Client::DigestAuth
   private def hexdigest(algorithm, data)
     digest = OpenSSL::Digest.new(algorithm)
     digest << data
-    {% if compare_versions(Crystal::VERSION, "0.35.0-0") >= 0 %}
-      digest.final.hexstring
-    {% else %}
-      digest.hexdigest
-    {% end %}
+    digest.final.hexstring
   end
 
   # Creates a client nonce value that is used across all requests based on the
